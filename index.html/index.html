@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Always You 🤍</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg,#ff9a9e,#fad0c4);
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+.container {
+  text-align: center;
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  z-index: 10;
+  max-width: 90vw;
+}
+
+h1 {
+  color: #ff4d6d;
+  transition: 0.5s;
+}
+
+.message {
+  margin-top: 15px;
+  white-space: pre-line;
+  min-height: 120px;
+  font-size: 18px;
+  color: #444;
+}
+
+button {
+  padding: 12px 25px;
+  font-size: 18px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+#yes {
+  background: #ff4d6d;
+  color: white;
+  margin-right: 15px;
+}
+
+#no {
+  position: absolute;
+  background: #ccc;
+}
+
+.hearts {
+  display:none;
+  font-size:30px;
+  margin-top:10px;
+}
+
+/* POPUPS */
+.popup {
+  position: fixed;
+  transform: scale(0);
+  transition: 1s;
+  text-align: center;
+}
+
+.popup img {
+  width: 130px;
+}
+
+.popup p {
+  margin-top: 5px;
+  font-weight: bold;
+  color: #ff4d6d;
+}
+
+.popup.show {
+  transform: scale(1);
+}
+
+.p1 { top:20px; left:20px; }
+.p2 { top:20px; right:20px; }
+.p3 { bottom:20px; left:20px; }
+.p4 { bottom:20px; right:20px; }
+.p5 { top:50%; left:20px; transform:translateY(-50%) scale(0); }
+.p6 { top:50%; right:20px; transform:translateY(-50%) scale(0); }
+
+.popup.show.p5,
+.popup.show.p6 {
+  transform: translateY(-50%) scale(1);
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1 id="mainText">Do you choose me — today and always...? ❤️</h1>
+  <button id="yes">I choose you ❤️</button>
+  <button id="no">Let me think 😈</button>
+  <div id="hearts" class="hearts">😍🥰😘❤️💌</div>
+  <div id="extraMessage" class="message"></div>
+</div>
+
+<!-- POPUPS WITH TEXT -->
+<div class="popup p1">
+  <img src="milk1.jpeg">
+  <p>I love you 😘❤️</p>
+</div>
+
+<div class="popup p2">
+  <img src="milk6.jpeg">
+  <p>I miss you 🥹</p>
+</div>
+
+<div class="popup p3">
+  <img src="milk3.jpeg">
+  <p>Always 🫂❤️</p>
+</div>
+
+<div class="popup p4">
+  <img src="milk4.jpeg">
+  <p>Only you 💗</p>
+</div>
+
+<div class="popup p5">
+  <img src="milk5.jpeg">
+  <p>Forever 🧸</p>
+</div>
+
+<div class="popup p6">
+  <img src="milk7.jpeg">
+  <p>Mine 🥹❤️</p>
+</div>
+
+<audio id="bgMusic">
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+var noBtn = document.getElementById("no");
+var yesBtn = document.getElementById("yes");
+var music = document.getElementById("bgMusic");
+var mainText = document.getElementById("mainText");
+var hearts = document.getElementById("hearts");
+var extraMessage = document.getElementById("extraMessage");
+var popups = document.querySelectorAll(".popup");
+
+function moveNo() {
+  var x = Math.random() * (window.innerWidth - 100);
+  var y = Math.random() * (window.innerHeight - 50);
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+}
+
+noBtn.addEventListener("mouseover", moveNo);
+noBtn.addEventListener("click", moveNo);
+noBtn.addEventListener("touchstart", moveNo);
+
+yesBtn.addEventListener("click", function() {
+
+  mainText.innerText = "Then it’s settled — always you..💗";
+  hearts.style.display = "block";
+  yesBtn.style.display = "none";
+  noBtn.style.display = "none";
+
+  music.currentTime = 0;
+  music.play();
+
+var lines = [
+  "I don’t believe in special days.",
+  "I believe in choosing you — every day.",
+  "In every lifetime.",
+  "In every version of us.",
+  "Through chaos and calm.",
+  "Through laughter and tears.",
+  "Even on the days we don’t understand each other.",
+  "Even when the world feels heavy.",
+  "If I had to choose again…",
+  "It would still be you.",
+  "And it will always be you.😘❤️",
+  "Kabhi kabhi gussa hojatu par pyar bhi utna he kartu ji..🫣",
+  "Aur tume bhi hona bolko gussa delaty rehte mujhe sab mlm..👀",
+  "Fi-dunya wal-akhirah..🥰❤️"
+];
+
+  extraMessage.innerText = "";
+
+  for (let i = 0; i < lines.length; i++) {
+    setTimeout(function() {
+      extraMessage.innerText += lines[i] + "\n\n";
+    }, i * 1200);
+  }
+
+  popups.forEach(function(p, i) {
+    setTimeout(function() {
+      p.classList.add("show");
+    }, 500 + i * 400);
+  });
+
+ setTimeout(function() {
+  mainText.innerText = "In this life and every next one — I choose you. 🫂❤️";
+}, 12000);
+
+});
+</script>
+
+</body>
+</html>
